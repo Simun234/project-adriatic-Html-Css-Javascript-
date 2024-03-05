@@ -11,11 +11,15 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
+  <body class="bg-light bg-dark">
     <div class="container-sm container-lg">
       <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-dark mb-2 mt-2">Dark</button>
-        <button type="button" class="btn btn-light mb-2 mt-2">Light</button>
+        <button type="button" id="darkModeBtn" class="btn btn-dark mb-2 mt-2">
+          Dark
+        </button>
+        <button type="button" id="lightModeBtn" class="btn btn-light mb-2 mt-2">
+          Light
+        </button>
       </div>
       <div class="table-responsive-sm table-responsive-lg">
         <table class="table">
@@ -34,12 +38,12 @@
               <th
                 class="font-sans-serif fw-normal fs-3 text-white text-center border"
               >
-                Date
+                Datum
               </th>
               <th
                 class="font-sans-serif fw-normal fs-3 text-white text-center border"
               >
-                Time
+                Vrijeme
               </th>
               <th
                 class="font-sans-serif fw-normal fs-3 text-white text-center border"
@@ -49,14 +53,16 @@
               <th
                 class="font-sans-serif fw-normal fs-3 text-white text-center border"
               >
-                Barcode
+                Barkod
               </th>
               <th
                 class="font-sans-serif fw-normal fs-3 text-white text-center border"
               >
                 Težina(kg)
               </th>
-              <th class="font-sans-serif fw-normal fs-3 text-white text-center">
+              <th
+                class="font-sans-serif fw-normal fs-3 text-white text-center border"
+              >
                 Registracija
               </th>
             </tr>

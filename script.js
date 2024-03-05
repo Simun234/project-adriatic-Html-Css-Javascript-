@@ -2,19 +2,19 @@ let currentPage = 1;
 let itemsPerPage = 24;
 let data = [];
 
-const tbody = document.getElementById("table.body");
+const tbody = document.getElementById("table-body");
 const prevBtn = document.getElementById("prethodni");
 const firstBtn = document.getElementById("prvi");
 const showAllBtn = document.getElementById("prikazi-sve");
 const lastBtn = document.getElementById("zadnji");
 const nextBtn = document.getElementById("sljedeći");
-const lightModeBtn = document.getElementById("light-mode-btn");
-const darkModeBtn = document.getElementById("dark-mode-btn");
+const lightModeBtn = document.getElementById("lightModeBtn");
+const darkModeBtn = document.getElementById("darkModeBtn");
 const body = document.body;
 
 function fetchData() {
   $.ajax({
-    url: "./data.json",
+    url: "data.json",
     method: "GET",
     dataType: "json",
     success: function (jsonData) {
@@ -36,26 +36,30 @@ function fetchData() {
 
 function displayData(page) {
   const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  const endIndex = page * itemsPerPage;
   const pageData = data.slice(startIndex, endIndex);
 
   tbody.innerHTML = "";
 
   pageData.forEach((item) => {
     const row = document.createElement("tr");
-    const dateTimeParts = item.dateTime ? item.dateTime.split("") : ["", ""];
-    const date = dateTimeParts[0];
-    const time = dateTimeParts[1];
+    const datumVrijemeParts = item.datumVrijeme
+      ? item.datumVrijeme.split(" ")
+      : ["", ""];
+    const datum = datumVrijemeParts[0];
+    const vrijeme = datumVrijemeParts[1];
 
     row.innerHTML = `
-    <td>${item.rowId || ""}</td>
-    <td>${item.iskaznica || ""}</td>
-    <td>${date}</td>
-    <td>${time}</td>
-    <td>${item.oznaciti || ""}</td>   
-    <td>${item.barcode || ""}</td>
-    <td><span class="tezina-display">${item.weight || ""}</span></td>    
-    <td>${item.registracija || ""}</td>
+    <td class="border text-center">${item.rowId || ""}</td>
+    <td class="border text-center">${item.iskaznica || ""}</td>
+    <td class="border text-center">${item.datum || ""}</td>
+    <td class="border text-center">${item.vrijeme || ""}</td>
+    <td class="border text-center">${item.oznaciti || ""}</td>   
+    <td class="border text-center">${item.barkod || ""}</td>
+    <td class="border text-center"><span class="tezina-display">${
+      item.tezina || ""
+    }</span></td>    
+    <td class="border text-center">${item.registracija || ""}</td>
     `;
 
     const tezinaCell = row.querySelector("td:nth-child(7)");
@@ -120,9 +124,11 @@ showAllBtn.addEventListener("click", () => {
 fetchData();
 
 darkModeBtn.addEventListener("click", () => {
-  body.classList.toggle("dark-mode-btn");
+  body.classList.add("bg-dark");
+  body.classList.remove("bg-light");
 });
 
 lightModeBtn.addEventListener("click", () => {
-  body.classList.toggle("light-mode-btn");
+  body.classList.add("bg-light");
+  body.classList.remove("bg-dark");
 });
