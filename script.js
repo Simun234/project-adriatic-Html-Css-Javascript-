@@ -10,15 +10,18 @@ const lastBtn = document.getElementById("zadnji");
 const nextBtn = document.getElementById("sljedeći");
 
 function fetchData() {
-  var xml = new XMLHttpRequest();
+  let xml = new XMLHttpRequest();
   xml.onreadystatechange = function () {
-    if (this.readyState === 4 && this.status === 200) {
-      var data = JSON.parse(this.responseText);
-      displayData(data);
+    if (this.readyState == 4 && this.status == 200) {
+      let response = JSON.parse(this.responseText);
+      if (Array.isArray(response)) {
+        data = response;
+        displayData();
+      }
     }
+    xml.open("GET", "data.json", true);
+    xml.send();
   };
-  xml.open("GET", "data.json", true);
-  xml.send();
 }
 
 function displayData(data, currentPage, itemsPerPage) {
