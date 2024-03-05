@@ -24,28 +24,28 @@ function fetchData() {
   };
 }
 
-function displayData(data, currentPage, itemsPerPage) {
-  const tbody = document.getElementById("table-body");
+function dispalyData(page) {
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = page * itemsPerPage;
+  const pageData = data.slice(startIndex, endIndex);
+
   tbody.innerHTML = "";
-  for (let i = 0; i < data.length; i++) {
-    if (
-      i >= (currentPage - 1) * itemsPerPage &&
-      i < currentPage * itemsPerPage
-    ) {
-      const tr = document.createElement("tr");
 
-      tr.innerHTML = `
-            <td>${item.rowId}</td>
-            <td>${item.iskaznica}</td>          
-            <td>${item.datum}</td>
-            <td>${item.vrijeme}</td>
-            <td>${item.oznaciti}</td>
-            <td>${item.barcode}</td>
-            <td><input type="text" value="${data[i].tezina}"></td>
-            <td>${item.registracija}</td>
-            `;
+  pageData.forEach((item) => {
+    const row = document.createElement("tr");
+    const dateTimePart = item.dateTime ? item.dateTime.split(" ") : [" ", " "];
+    const date = dateTimePart[0];
+    const time = dateTimePart[1];
 
-      tbody.appendChild(tr);
-    }
-  }
+    row.innerHTML = `
+    <td>${item.rowId || ""}</td>
+    <td>${item.iskaznica || ""}</td>
+    <td>${date}</td>
+    <td>${time}</td>
+    <td>${item.oznaciti || ""}</td>
+    <td>${item.barcode || ""}</td>
+    <td><span class="weight-display">${item.weight || ""}</span></td>
+    <td>${item.registracija || ""}</td>
+    `;
+  });
 }
