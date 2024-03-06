@@ -129,7 +129,7 @@ fetchData();
 darkModeBtn.addEventListener("click", () => {
   body.classList.add("bg-dark");
   body.classList.remove("bg-light");
-  thead.classList.add("table-success");
+  thead.classList.add("table-light");
   thead.classList.remove("table-dark");
   thElements.forEach((th) => {
     th.classList.add("text-black");
