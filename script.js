@@ -3,6 +3,9 @@ let itemsPerPage = 24;
 let data = [];
 
 const tbody = document.getElementById("table-body");
+const tdElements = document.querySelectorAll("tbody td");
+const thead = document.querySelector("thead");
+const thElements = document.querySelectorAll("thead th");
 const prevBtn = document.getElementById("prethodni");
 const firstBtn = document.getElementById("prvi");
 const showAllBtn = document.getElementById("prikazi-sve");
@@ -126,9 +129,29 @@ fetchData();
 darkModeBtn.addEventListener("click", () => {
   body.classList.add("bg-dark");
   body.classList.remove("bg-light");
+  thead.classList.add("table-success");
+  thead.classList.remove("table-dark");
+  thElements.forEach((th) => {
+    th.classList.add("text-black");
+    th.classList.remove("text-white");
+    th.classList.add("border-black");
+    th.classList.remove("border-white");
+  });
+  tbody.classList.add("table-light");
+  tbody.classList.remove("table-dark");
 });
 
 lightModeBtn.addEventListener("click", () => {
   body.classList.add("bg-light");
   body.classList.remove("bg-dark");
+  thead.classList.add("table-dark");
+  thead.classList.remove("table-success");
+  thElements.forEach((th) => {
+    th.classList.add("text-white");
+    th.classList.remove("text-black");
+    th.classList.add("border-white");
+    th.classList.remove("border-black");
+  });
+  tbody.classList.add("table-dark");
+  tbody.classList.remove("table-");
 });
